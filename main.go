@@ -56,6 +56,6 @@ func hello(c *gin.Context) {
 func main() {
 	router := gin.Default()
 
-	router.Any("/", hello)
+	router.Any("/wxrobot/", hello)
 	router.Run(":12080")
 }
