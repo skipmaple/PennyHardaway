@@ -57,5 +57,5 @@ func main() {
 	router := gin.Default()
 
 	router.Any("/wxrobot/", hello)
-	router.Run(":12080")
+	router.Run(":80")
 }
