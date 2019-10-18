@@ -11,16 +11,16 @@ import (
 
 var db *gorm.DB
 
-func init() {
-	// open a db connection
-	var err error
-	db, err = gorm.Open("mysql", "root:root@/hardaway?charset=utf8&parseTime=True&loc=Local")
-	if err != nil {
-		panic("failed to connect database")
-	}
-	//Migrate the schema
-	//db.AutoMigrate(&todoModel{})
-}
+//func init() {
+//	// open a db connection
+//	var err error
+//	db, err = gorm.Open("mysql", "root:root@/hardaway?charset=utf8&parseTime=True&loc=Local")
+//	if err != nil {
+//		panic("failed to connect database")
+//	}
+//	//Migrate the schema
+//	//db.AutoMigrate(&todoModel{})
+//}
 
 func hello(c *gin.Context) {
 
@@ -56,6 +56,6 @@ func hello(c *gin.Context) {
 func main() {
 	router := gin.Default()
 
-	router.Any("/", hello)
+	router.Any("/wxrobot/", hello)
 	router.Run(":12080")
 }
