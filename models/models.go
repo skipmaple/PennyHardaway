@@ -39,7 +39,7 @@ func Setup() {
 
 	if err != nil {
 		//log.Println(err)
-		logging.Error("数据库连接错误: ", err)
+		logging.Fatal("数据库连接错误: ", err)
 	}
 
 	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
