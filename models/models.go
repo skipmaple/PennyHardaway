@@ -1,7 +1,7 @@
 package models
 
 import (
-	"log"
+	"PennyHardway/pkg/logging"
 	"fmt"
 
 	"github.com/jinzhu/gorm"
@@ -38,7 +38,8 @@ func Setup() {
 		dbName))
 
 	if err != nil {
-		log.Println(err)
+		//log.Println(err)
+		logging.Error("数据库连接错误: ", err)
 	}
 
 	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
