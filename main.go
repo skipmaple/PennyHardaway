@@ -28,8 +28,8 @@ func hello(c *gin.Context) {
 	config := &wechat.Config {
 		AppID:			"wxb49b036278e9e065",
 		AppSecret:		"e91664672a12386530600cb5bb30ed84",
-		Token: 			"skipmapledrewlee",
-		EncodingAESKey:	"YCPnsvCg5oihIRrTALYDugXwwPekWcc3cjQXcUXefds",
+		Token: 			"skipmapledrewleeawesome",
+		EncodingAESKey:	"Qk6AdKdkzOnYbc0tQeWfMz1mWzFfETWsZthIXBtGXB9",
 	}
 	wc := wechat.NewWechat(config)
 
