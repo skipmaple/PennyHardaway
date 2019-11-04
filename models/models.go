@@ -25,7 +25,6 @@ func Setup() {
 	)
 
 	dbType = setting.DatabaseSetting.Type
-	log.Println("****dbType", dbType)
 	dbName = setting.DatabaseSetting.Name
 	user = setting.DatabaseSetting.User
 	password = setting.DatabaseSetting.Password
