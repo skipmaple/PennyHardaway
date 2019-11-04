@@ -1,0 +1,3 @@
+[INFO][auth.go:17]2019/11/01 20:40:27 [**** false]
+[INFO][auth.go:17]2019/11/01 20:47:19 [**** false]
+[ERROR][auth.go:20]2019/11/01 20:47:19 [Error 1146: Table 'wx_robot.auth' doesn't exist]
