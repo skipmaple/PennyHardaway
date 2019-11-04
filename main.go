@@ -56,6 +56,7 @@ func main() {
 		MaxHeaderBytes:    maxHeaderBytes,
 	}
 
+	logging.Error(endPoint, " is running...")
 	log.Printf("[info] start http server listening %s", endPoint)
 
 	server.ListenAndServe()

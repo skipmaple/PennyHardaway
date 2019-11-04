@@ -3,3 +3,6 @@
 [INFO][auth.go:17]2019/11/04 10:24:22 [**** false]
 [INFO][auth.go:17]2019/11/04 10:25:27 [**** false]
 [INFO][auth.go:17]2019/11/04 10:26:56 [**** false]
+[INFO][main.go:60]2019/11/04 16:44:41 [:8080  is running...]
+[INFO][main.go:59]2019/11/04 16:46:04 [:8080  is running...]
+[ERROR][main.go:59]2019/11/04 16:47:56 [:8080  is running...]

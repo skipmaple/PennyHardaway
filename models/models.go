@@ -1,8 +1,8 @@
 package models
 
 import (
-	"PennyHardway/pkg/logging"
 	"fmt"
+	"log"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
@@ -38,8 +38,7 @@ func Setup() {
 		dbName))
 
 	if err != nil {
-		//log.Println(err)
-		logging.Fatal("数据库连接错误: ", err)
+		log.Println(err)
 	}
 
 	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
