@@ -26,7 +26,7 @@ func InitRouter() *gin.Engine {
 	url := ginSwagger.URL("http://localhost:8080/swagger/doc.json")
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 
-	r.Any("/wxrobot/", hello)
+	r.POST("/wxrobot/", hello)
 
 	apiv1 := r.Group("/api/v1")
 	apiv1.Use(jwt.JWT())
