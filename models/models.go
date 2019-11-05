@@ -13,14 +13,14 @@ import (
 var db *gorm.DB
 
 type Model struct {
-	ID int `gorm:"primary_key" json:"id"`
-	CreatedOn int `json:"created_on"`
+	ID         int `gorm:"primary_key" json:"id"`
+	CreatedOn  int `json:"created_on"`
 	ModifiedOn int `json:"modified_on"`
 }
 
 func Setup() {
 	var (
-		err error
+		err                                               error
 		dbType, dbName, user, password, host, tablePrefix string
 	)
 
@@ -50,6 +50,6 @@ func Setup() {
 	//db.DB().SetMaxOpenConns(100)
 }
 
-func CloseDB()  {
+func CloseDB() {
 	defer db.Close()
 }

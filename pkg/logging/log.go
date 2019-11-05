@@ -1,11 +1,11 @@
 package logging
 
 import (
-	"fmt"
 	"log"
 	"os"
-	"path/filepath"
-	"runtime"
+	"time"
+
+	"github.com/rs/zerolog"
 
 	"PennyHardway/pkg/file"
 )
@@ -15,11 +15,12 @@ type Level int
 var (
 	F *os.File
 
-	DefaultPrefix = ""
+	DefaultPrefix      = ""
 	DefaultCallerDepth = 2
 
-	logger *log.Logger
-	logPrefix = ""
+	//logger *log.Logger
+	logger     zerolog.Logger
+	logPrefix  = ""
 	levelFlags = []string{"DEBUG", "INFO", "WARN", "ERROR", "FATAL"}
 )
 
@@ -40,41 +41,29 @@ func Setup() {
 		log.Fatalf("logging.Setup err: %v", err)
 	}
 
-	logger = log.New(F, DefaultPrefix, log.LstdFlags)
+	//logger = log.New(F, DefaultPrefix, log.LstdFlags)
+	output := zerolog.ConsoleWriter{Out: F, TimeFormat: time.RFC850}
+	logger = zerolog.New(output).With().Caller().Timestamp().Logger()
+
+	//logger = log.New(F, DefaultPrefix, log.LstdFlags)
 }
 
 func Debug(v ...interface{}) {
-	setPrefix(DEBUG)
-	logger.Println(v)
+	logger.Debug().Msgf("%v", v)
 }
 
 func Info(v ...interface{}) {
-	setPrefix(INFO)
-	logger.Println(v)
+	logger.Info().Msgf("%v", v)
 }
 
 func Warn(v ...interface{}) {
-	setPrefix(WARNING)
-	logger.Println(v)
+	logger.Warn().Msgf("%v", v)
 }
 
 func Error(v ...interface{}) {
-	setPrefix(ERROR)
-	logger.Println(v)
+	logger.Error().Msgf("%v", v)
 }
 
 func Fatal(v ...interface{}) {
-	setPrefix(FATAL)
-	logger.Println(v)
-}
-
-func setPrefix(level Level) {
-	_, file, line, ok := runtime.Caller(DefaultCallerDepth)
-	if ok {
-		logPrefix = fmt.Sprintf("[%s][%s:%d]", levelFlags[level], filepath.Base(file), line)
-	} else {
-		logPrefix = fmt.Sprintf("[%s]", levelFlags[level])
-	}
-
-	logger.SetPrefix(logPrefix)
+	logger.Fatal().Msgf("%v", v)
 }

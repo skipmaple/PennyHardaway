@@ -10,8 +10,8 @@ import (
 var (
 	LogSavePath = "runtime/logs/"
 	LogSaveName = "log"
-	LogFileExt = "log"
-	TimeFormat = "20060102"
+	LogFileExt  = "log"
+	TimeFormat  = "20060102"
 )
 
 // getLogFilePath get the log file save path

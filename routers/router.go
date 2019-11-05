@@ -10,8 +10,8 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"log"
 
-	"PennyHardway/pkg/setting"
 	_ "PennyHardway/docs"
+	"PennyHardway/pkg/setting"
 )
 
 func InitRouter() *gin.Engine {
@@ -19,12 +19,8 @@ func InitRouter() *gin.Engine {
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 
-	//gin.SetMode(setting.RunMode)
-
 	r.GET("/auth", api.GetAuth)
 
-	//url := ginSwagger.URL("http://localhost:8080/swagger/doc.json")
-	//r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	r.POST("/wxrobot/", hello)
@@ -35,18 +31,17 @@ func InitRouter() *gin.Engine {
 		//	这里的路由需要加token才可以访问
 	}
 
-
 	return r
 }
 
 func hello(c *gin.Context) {
 
 	// 配置微信参数
-	config := &wechat.Config {
-		AppID:			setting.WechatSetting.AppID,
-		AppSecret:		setting.WechatSetting.AppSecret,
-		Token: 			setting.WechatSetting.Token,
-		EncodingAESKey:	setting.WechatSetting.EncodingAESKey,
+	config := &wechat.Config{
+		AppID:          setting.WechatSetting.AppID,
+		AppSecret:      setting.WechatSetting.AppSecret,
+		Token:          setting.WechatSetting.Token,
+		EncodingAESKey: setting.WechatSetting.EncodingAESKey,
 	}
 	wc := wechat.NewWechat(config)
 
@@ -61,7 +56,7 @@ func hello(c *gin.Context) {
 
 	// 处理消息接收及回复
 	err := server.Serve()
-	if err != nil{
+	if err != nil {
 		log.Println("handle message receive err: ", err)
 		return
 	}
@@ -69,4 +64,3 @@ func hello(c *gin.Context) {
 	// 发送恢复的消息
 	server.Send()
 }
-

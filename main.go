@@ -2,18 +2,21 @@ package main
 
 import (
 	"fmt"
-	"log"
+
+	//"log"
 	"net/http"
 
-	"github.com/jinzhu/gorm"
 	"github.com/gin-gonic/gin"
+	"github.com/jinzhu/gorm"
+	//"github.com/rs/zerolog"
+	//"github.com/rs/zerolog/log"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
-	"PennyHardway/routers"
-	"PennyHardway/pkg/setting"
 	"PennyHardway/models"
 	"PennyHardway/pkg/logging"
+	"PennyHardway/pkg/setting"
 	"PennyHardway/pkg/util"
+	"PennyHardway/routers"
 )
 
 var db *gorm.DB
@@ -24,7 +27,6 @@ func init() {
 	logging.Setup()
 	util.Setup()
 }
-
 
 // @title PennyHardaway API
 // @version 1.0
@@ -43,14 +45,27 @@ func main() {
 	maxHeaderBytes := 1 << 20
 
 	server := &http.Server{
-		Addr:              endPoint,
-		Handler:           router,
-		ReadTimeout:       readTimeout,
-		WriteTimeout:      writeTimeout,
-		MaxHeaderBytes:    maxHeaderBytes,
+		Addr:           endPoint,
+		Handler:        router,
+		ReadTimeout:    readTimeout,
+		WriteTimeout:   writeTimeout,
+		MaxHeaderBytes: maxHeaderBytes,
 	}
 
-	log.Printf("[info] start http server listening %s", endPoint)
+	//log.Printf("[info] start http server listening %s", endPoint)
+	//zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
+	//output := zerolog.ConsoleWriter{Out: os.Stderr, TimeFormat: time.RFC850}
+	//output.FormatLevel = func(i interface{}) string {
+	//	return strings.ToUpper(fmt.Sprintf("| %-6s|", i))
+	//}
+	//log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr, TimeFormat: time.RFC850})
+	//log := zerolog.New(output).With().Caller().Timestamp().Logger()
+
+	//log.Info().Msgf("[info] start http server listening %s", endPoint)
+	//log.Debug().Msgf("[info] start http server listening %s", endPoint)
+	//log.Fatal().Msgf("[info] start http server listening %s", endPoint)
+	//log.Error().Msgf("type of log is %T", log)
+	logging.Debug("hello world %s", endPoint)
 
 	server.ListenAndServe()
 }
