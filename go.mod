@@ -7,6 +7,7 @@ require (
 	github.com/astaxie/beego v1.12.0
 	github.com/bradfitz/gomemcache v0.0.0-20190913173617-a41fca850d0b // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/fvbock/endless v0.0.0-20170109170031-447134032cb6
 	github.com/gin-gonic/gin v1.4.0
 	github.com/go-ini/ini v1.49.0
 	github.com/go-openapi/jsonreference v0.19.3 // indirect

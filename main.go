@@ -3,10 +3,11 @@ package main
 import (
 	"fmt"
 	"log"
-	"net/http"
+	"syscall"
 
 	"github.com/jinzhu/gorm"
 	"github.com/gin-gonic/gin"
+	"github.com/fvbock/endless"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
 	"PennyHardway/routers"
@@ -36,21 +37,25 @@ func init() {
 func main() {
 	gin.SetMode(setting.ServerSetting.RunMode)
 
-	router := routers.InitRouter()
+	//router := routers.InitRouter()
 	readTimeout := setting.ServerSetting.ReadTimeout
 	writeTimeout := setting.ServerSetting.WriteTimeout
-	endPoint := fmt.Sprintf(":%d", setting.ServerSetting.HttpPort)
 	maxHeaderBytes := 1 << 20
+	endPoint := fmt.Sprintf(":%d", setting.ServerSetting.HttpPort)
 
-	server := &http.Server{
-		Addr:              endPoint,
-		Handler:           router,
-		ReadTimeout:       readTimeout,
-		WriteTimeout:      writeTimeout,
-		MaxHeaderBytes:    maxHeaderBytes,
+	endless.DefaultReadTimeOut = readTimeout
+	endless.DefaultWriteTimeOut = writeTimeout
+	endless.DefaultMaxHeaderBytes = maxHeaderBytes
+
+	server := endless.NewServer(endPoint, routers.InitRouter())
+	server.BeforeBegin = func(add string) {
+		log.Printf("Actual pid is %d", syscall.Getpid())
 	}
 
 	log.Printf("[info] start http server listening %s", endPoint)
 
-	server.ListenAndServe()
+	err := server.ListenAndServe()
+	if err != nil {
+		logging.Error("Server err: %v", err)
+	}
 }
