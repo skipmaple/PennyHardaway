@@ -5,7 +5,6 @@ import (
 	"PennyHardway/routers/api"
 	"github.com/gin-gonic/gin"
 	"github.com/silenceper/wechat"
-	"github.com/silenceper/wechat/menu"
 	"github.com/silenceper/wechat/message"
 	_ "github.com/silenceper/wechat/server"
 	swaggerFiles "github.com/swaggo/files"
@@ -38,7 +37,6 @@ func InitRouter() *gin.Engine {
 }
 
 func hello(c *gin.Context) {
-
 	// 配置微信参数
 	config := &wechat.Config{
 		AppID:          setting.WechatSetting.AppID,
@@ -47,32 +45,6 @@ func hello(c *gin.Context) {
 		EncodingAESKey: setting.WechatSetting.EncodingAESKey,
 	}
 	wc := wechat.NewWechat(config)
-
-	mu := wc.GetMenu()
-
-	buttons := make([]*menu.Button, 1)
-	btn := new(menu.Button)
-
-	// 创建click类型菜单
-	btn.SetClickButton("button1", "btn_key1")
-	buttons[0] = btn
-
-	// 设置btn为二级菜单
-	btn2 := new(menu.Button)
-	btn2.SetSubButton("subBtn", buttons)
-
-	buttons2 := make([]*menu.Button, 1)
-	buttons2[0] = btn2
-
-	log.Println("buttons2", buttons2)
-	// 发送请求
-	err := mu.SetMenu(buttons2)
-	if err != nil {
-		//logging.Error("err = %v", err)
-		log.Printf("set menu err: %v", err)
-		return
-	}
-
 	// 传入request和responseWriter
 	server := wc.GetServer(c.Request, c.Writer)
 	// 设置接收消息的处理方法
@@ -83,7 +55,7 @@ func hello(c *gin.Context) {
 	})
 
 	// 处理消息接收及回复
-	err = server.Serve()
+	err := server.Serve()
 	if err != nil {
 		log.Println("handle message receive err: ", err)
 		return
