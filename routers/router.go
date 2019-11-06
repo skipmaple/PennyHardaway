@@ -64,6 +64,7 @@ func hello(c *gin.Context) {
 	buttons2 := make([]*menu.Button, 1)
 	buttons2[0] = btn2
 
+	log.Println("buttons2", buttons2)
 	// 发送请求
 	err := mu.SetMenu(buttons2)
 	if err != nil {
