@@ -8,51 +8,51 @@ import (
 )
 
 type App struct {
-	JwtSecret 		string
-	PageSize 		int
+	JwtSecret       string
+	PageSize        int
 	RuntimeRootPath string
-	LogSavePath 	string
-	LogSaveName 	string
-	LogFileExt		string
-	TimeFormat 		string
+	LogSavePath     string
+	LogSaveName     string
+	LogFileExt      string
+	TimeFormat      string
 }
 
 var AppSetting = &App{}
 
 type Server struct {
-	RunMode 		string
-	HttpPort 		int
-	ReadTimeout 	time.Duration
-	WriteTimeout 	time.Duration
+	RunMode      string
+	HttpPort     int
+	ReadTimeout  time.Duration
+	WriteTimeout time.Duration
 }
 
 var ServerSetting = &Server{}
 
 type Database struct {
-	Type			string
-	User 			string
-	Password        string
-	Host 			string
-	Name  			string
-	TablePrefix		string
+	Type        string
+	User        string
+	Password    string
+	Host        string
+	Name        string
+	TablePrefix string
 }
 
 var DatabaseSetting = &Database{}
 
 type Redis struct {
-	Host			string
-	Password		string
-	MaxIdle			int
-	MaxActive		int
-	IdleTimeout		time.Duration
+	Host        string
+	Password    string
+	MaxIdle     int
+	MaxActive   int
+	IdleTimeout time.Duration
 }
 
 var RedisSetting = &Redis{}
 
 type Wechat struct {
-	AppID string
-	AppSecret string
-	Token string
+	AppID          string
+	AppSecret      string
+	Token          string
 	EncodingAESKey string
 }
 

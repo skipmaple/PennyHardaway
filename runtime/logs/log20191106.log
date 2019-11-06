@@ -1,0 +1,1 @@
+[ERROR][main.go:58]2019/11/06 19:18:02 [Server err: %v accept tcp [::]:8080: use of closed network connection]

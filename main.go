@@ -5,16 +5,16 @@ import (
 	"log"
 	"syscall"
 
-	"github.com/jinzhu/gorm"
-	"github.com/gin-gonic/gin"
 	"github.com/fvbock/endless"
+	"github.com/gin-gonic/gin"
+	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
-	"PennyHardway/routers"
-	"PennyHardway/pkg/setting"
 	"PennyHardway/models"
 	"PennyHardway/pkg/logging"
+	"PennyHardway/pkg/setting"
 	"PennyHardway/pkg/util"
+	"PennyHardway/routers"
 )
 
 var db *gorm.DB
@@ -25,7 +25,6 @@ func init() {
 	logging.Setup()
 	util.Setup()
 }
-
 
 // @title PennyHardaway API
 // @version 1.0
