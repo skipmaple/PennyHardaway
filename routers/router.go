@@ -2,7 +2,6 @@ package routers
 
 import (
 	"PennyHardway/middleware/jwt"
-	"PennyHardway/pkg/logging"
 	"PennyHardway/routers/api"
 	"github.com/gin-gonic/gin"
 	"github.com/silenceper/wechat"
@@ -68,7 +67,8 @@ func hello(c *gin.Context) {
 	// 发送请求
 	err := mu.SetMenu(buttons2)
 	if err != nil {
-		logging.Error("err = %v", err)
+		//logging.Error("err = %v", err)
+		log.Printf("set menu err: %v", err)
 		return
 	}
 
