@@ -1,0 +1,3 @@
+[ERROR][main.go:62]2019/11/07 11:42:06 [Server err: %v accept tcp [::]:8080: use of closed network connection]
+[ERROR][main.go:59]2019/11/07 17:41:18 [Server err: %v accept tcp [::]:8080: use of closed network connection]
+[ERROR][main.go:59]2019/11/07 17:42:40 [Server err: %v accept tcp [::]:8080: use of closed network connection]
