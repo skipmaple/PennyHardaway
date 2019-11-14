@@ -1,7 +1,6 @@
 package main
 
 import (
-	"PennyHardway/wechat"
 	"fmt"
 	"log"
 	"syscall"
@@ -25,7 +24,7 @@ func init() {
 	models.Setup()
 	logging.Setup()
 	util.Setup()
-	wechat.Setup()
+	//wechat.Setup()
 }
 
 // @title PennyHardaway API

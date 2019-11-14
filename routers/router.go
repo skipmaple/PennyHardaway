@@ -45,13 +45,99 @@ func hello(c *gin.Context) {
 		EncodingAESKey: setting.WechatSetting.EncodingAESKey,
 	}
 	wc := wechat.NewWechat(config)
+
 	// 传入request和responseWriter
 	server := wc.GetServer(c.Request, c.Writer)
+
 	// 设置接收消息的处理方法
-	server.SetMessageHandler(func(msg message.MixMessage) *message.Reply {
-		// 回复消息: 演示回复用户发送的消息
-		text := message.NewText(msg.Content)
-		return &message.Reply{MsgType: message.MsgTypeText, MsgData: text}
+	server.SetMessageHandler(func(v message.MixMessage) *message.Reply {
+
+		switch v.MsgType {
+		// 文本消息
+		case message.MsgTypeText:
+			//	do something
+			// 回复消息: 演示回复用户发送的消息
+			text := message.NewText("您输入了: " + v.Content)
+			return &message.Reply{MsgType: message.MsgTypeText, MsgData: text}
+
+		// 图片消息
+		case message.MsgTypeImage:
+			//	do something
+
+		// 语音消息
+		case message.MsgTypeVoice:
+			//	do something
+
+		// 视频消息
+		case message.MsgTypeVideo:
+			//	do something
+
+		// 小视频消息
+		case message.MsgTypeShortVideo:
+			//	do something
+
+		// 地理位置消息
+		case message.MsgTypeLocation:
+			//	do something
+
+		// 链接消息
+		case message.MsgTypeLink:
+			//	do something
+
+		// 事件推送消息
+		case message.MsgTypeEvent:
+			//	do something
+			switch v.Event {
+				// 订阅
+				case message.EventSubscribe:
+					// do something
+
+				// 取消订阅
+				case message.EventUnsubscribe:
+					// do something
+					
+				// 用户已经关注公众号，则微信会将带场景值扫描事件推送给开发者
+				case message.EventScan:
+					// do something
+
+				// 上报地理位置事件
+				case message.EventLocation:
+					// do something
+
+				// 点击菜单拉取消息时的事件推送
+				case message.EventClick:
+					// do something
+
+				// 点击菜单跳转链接时的事件推送
+				case message.EventView:
+					// do something
+
+				// 扫码推事件的事件推送
+				case message.EventScancodePush:
+					// do something
+
+				// 扫码推事件且弹出"消息接收中"的事件推送
+				case message.EventScancodeWaitmsg:
+					// do something
+
+				// 弹出系统拍照发图的事件推送
+				case message.EventPicSysphoto:
+					// do something
+
+				// 弹出拍照或者相册发图的事件推送
+				case message.EventPicPhotoOrAlbum:
+					// do something
+
+				// 弹出微信相册发图器的事件推送
+				case message.EventPicWeixin:
+					// do something
+
+				// 弹出地理位置选择器的事件推送
+				case message.EventLocationSelect:
+					// do something
+			}
+		}
+		return nil
 	})
 
 	// 处理消息接收及回复

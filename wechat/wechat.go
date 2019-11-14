@@ -3,20 +3,31 @@ package wechat
 import (
 	"PennyHardway/pkg/setting"
 	"github.com/silenceper/wechat"
+	"github.com/silenceper/wechat/cache"
 	"github.com/silenceper/wechat/menu"
 	"log"
 )
 
 func Setup() {
+	// 使用redis保存access_token
+	redisOpts := &cache.RedisOpts{
+		Host:        setting.RedisSetting.Host,
+		Password:    setting.RedisSetting.Password,
+		MaxIdle:     setting.RedisSetting.MaxIdle,
+		MaxActive:   setting.RedisSetting.MaxActive,
+		IdleTimeout: int32(setting.RedisSetting.IdleTimeout),
+	}
+	redisCache := cache.NewRedis(redisOpts)
+
 	// 配置微信参数
 	config := &wechat.Config{
-	AppID:          setting.WechatSetting.AppID,
-	AppSecret:      setting.WechatSetting.AppSecret,
-	Token:          setting.WechatSetting.Token,
-	EncodingAESKey: setting.WechatSetting.EncodingAESKey,
+		AppID:          setting.WechatSetting.AppID,
+		AppSecret:      setting.WechatSetting.AppSecret,
+		Token:          setting.WechatSetting.Token,
+		EncodingAESKey: setting.WechatSetting.EncodingAESKey,
+		Cache:          redisCache,
 	}
 	wc := wechat.NewWechat(config)
-
 
 	mu := wc.GetMenu()
 
