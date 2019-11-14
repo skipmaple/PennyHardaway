@@ -63,10 +63,14 @@ func hello(c *gin.Context) {
 		// 图片消息
 		case message.MsgTypeImage:
 			//	do something
+			text := message.NewText("您发送了图片")
+			return &message.Reply{MsgType: message.MsgTypeText, MsgData: text}
 
 		// 语音消息
 		case message.MsgTypeVoice:
 			//	do something
+			text := message.NewText("您发送了语音")
+			return &message.Reply{MsgType: message.MsgTypeText, MsgData: text}
 
 		// 视频消息
 		case message.MsgTypeVideo:
@@ -91,10 +95,14 @@ func hello(c *gin.Context) {
 				// 订阅
 				case message.EventSubscribe:
 					// do something
+					text := message.NewText("欢迎入队～")
+					return &message.Reply{MsgType: message.MsgTypeText, MsgData: text}
 
 				// 取消订阅
 				case message.EventUnsubscribe:
 					// do something
+					text := message.NewText("拜拜～")
+					return &message.Reply{MsgType: message.MsgTypeText, MsgData: text}
 					
 				// 用户已经关注公众号，则微信会将带场景值扫描事件推送给开发者
 				case message.EventScan:
