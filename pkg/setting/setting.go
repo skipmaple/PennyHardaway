@@ -49,15 +49,6 @@ type Redis struct {
 
 var RedisSetting = &Redis{}
 
-type Wechat struct {
-	AppID string
-	AppSecret string
-	Token string
-	EncodingAESKey string
-}
-
-var WechatSetting = &Wechat{}
-
 var cfg *ini.File
 
 func Setup() {
@@ -71,7 +62,6 @@ func Setup() {
 	mapTo("server", ServerSetting)
 	mapTo("database", DatabaseSetting)
 	mapTo("redis", RedisSetting)
-	mapTo("wechat", WechatSetting)
 
 	ServerSetting.ReadTimeout = ServerSetting.ReadTimeout * time.Second
 	ServerSetting.WriteTimeout = ServerSetting.WriteTimeout * time.Second
