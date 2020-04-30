@@ -16,5 +16,5 @@ func GetMsg(code int) string {
 		return msg
 	}
 
-	return  MsgFlags[ERROR]
+	return MsgFlags[ERROR]
 }
